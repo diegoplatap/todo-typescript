@@ -4,6 +4,6 @@ import App from "./App";
 
 it("renders a todo app", () => {
   render(<App />);
-  const linkElement = screen.getByText(/Todo app with typescript/i);
+  const linkElement = screen.getByText(/Todo App with Typescript/i);
   expect(linkElement).toBeInTheDocument();
 });

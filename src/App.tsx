@@ -1,18 +1,15 @@
 import React, { useState } from "react";
+import { AddTodoForm } from "./AddTodoForm";
 import Title from "./Title";
-import TodoListItem from "./TodoListItem";
-interface Todo {
-  text: string;
-  complete: boolean;
-}
+import { TodoList } from "./TodoList";
 
 const initialTodos: Todo[] = [
   {
-    text: "Walk the dog",
+    text: "Paseando a zeus",
     complete: false,
   },
   {
-    text: "Write app",
+    text: "Escribir App",
     complete: true,
   },
 ];
@@ -20,7 +17,7 @@ const initialTodos: Todo[] = [
 function App() {
   const [todos, setTodos] = useState(initialTodos);
 
-  const toggleTodo = (selectedTodo: Todo) => {
+  const toggleTodo: ToggleTodo = (selectedTodo: Todo) => {
     const newTodos = todos.map((todo) => {
       if (todo === selectedTodo) {
         return {
@@ -33,11 +30,16 @@ function App() {
     setTodos(newTodos);
   };
 
+  const addTodo: AddTodo = (text: string) => {
+    const newTodo = { text, complete: false };
+    setTodos([...todos, newTodo]);
+  };
+
   return (
     <>
       <Title title="Todo App with Typescript" />
-      <TodoListItem todo={todos[0]} toggleTodo={toggleTodo} />
-      <TodoListItem todo={todos[1]} toggleTodo={toggleTodo} />
+      <TodoList todos={todos} toggleTodo={toggleTodo} />
+      <AddTodoForm addTodo={addTodo} />
     </>
   );
 }
